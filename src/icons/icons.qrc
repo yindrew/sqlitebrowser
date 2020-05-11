@@ -101,5 +101,6 @@
         <file alias="open_in_app">application_link.png</file>
         <file alias="document_link">document-link.png</file>
         <file alias="open_data_in_app">application_go.png</file>
+        <file alias="db_detach">database_link_broken.png</file>
     </qresource>
 </RCC>
