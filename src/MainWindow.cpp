@@ -261,12 +261,15 @@ void MainWindow::init()
     popupTableMenu->addAction(ui->actionEditBrowseTable);
     popupTableMenu->addAction(ui->editModifyObjectAction);
     popupTableMenu->addAction(ui->editDeleteObjectAction);
+    popupTableMenu->addAction(ui->fileDetachAction);
     popupTableMenu->addSeparator();
     popupTableMenu->addAction(ui->actionEditCopyCreateStatement);
     popupTableMenu->addAction(ui->actionExportCsvPopup);
 
     popupSchemaDockMenu = new QMenu(this);
     popupSchemaDockMenu->addAction(ui->actionPopupSchemaDockBrowseTable);
+    popupSchemaDockMenu->addAction(ui->actionPopupSchemaDockDetachDatabase);
+    // popupSchemaDockMenu->addAction(ui->fileDetachAction);
     popupSchemaDockMenu->addSeparator();
     popupSchemaDockMenu->addAction(ui->actionDropQualifiedCheck);
     popupSchemaDockMenu->addAction(ui->actionEnquoteNamesCheck);
@@ -1482,7 +1485,7 @@ void MainWindow::createTreeContextMenu(const QPoint &qPoint)
 
     QString type = ui->dbTreeWidget->model()->data(ui->dbTreeWidget->currentIndex().sibling(ui->dbTreeWidget->currentIndex().row(), 1)).toString();
 
-    if(type == "table" || type == "view" || type == "trigger" || type == "index")
+    if(type == "table" || type == "view" || type == "trigger" || type == "index" || type == "database")
         popupTableMenu->exec(ui->dbTreeWidget->mapToGlobal(qPoint));
 }
 
@@ -1490,13 +1493,21 @@ void MainWindow::createTreeContextMenu(const QPoint &qPoint)
 void MainWindow::createSchemaDockContextMenu(const QPoint &qPoint)
 {
     bool enable_browse_table = false;
+    bool enable_detach_file = false;
     if(ui->treeSchemaDock->selectionModel()->hasSelection())
     {
         QString type = ui->treeSchemaDock->model()->data(ui->treeSchemaDock->currentIndex().sibling(ui->treeSchemaDock->currentIndex().row(), DbStructureModel::ColumnObjectType), Qt::EditRole).toString();
         if(type == "table" || type == "view")
+        {
             enable_browse_table = true;
+        }
+        if(type == "database")
+        {
+            enable_detach_file = true;
+        }
     }
     ui->actionPopupSchemaDockBrowseTable->setEnabled(enable_browse_table);
+    ui->actionPopupSchemaDockDetachDatabase->setEnabled(enable_detach_file);
 
     popupSchemaDockMenu->exec(ui->treeSchemaDock->mapToGlobal(qPoint));
 }
@@ -1507,21 +1518,28 @@ void MainWindow::changeTreeSelection()
     ui->editDeleteObjectAction->setEnabled(false);
     ui->editModifyObjectAction->setEnabled(false);
     ui->actionEditBrowseTable->setEnabled(false);
+    ui->actionExportCsvPopup->setEnabled(false);
+    ui->fileDetachAction->setEnabled(false);
+    ui->actionEditCopyCreateStatement->setEnabled(false);
+
+    ui->fileDetachAction->setVisible(false);
 
     if(!ui->dbTreeWidget->currentIndex().isValid())
+    {
         return;
+    }
 
     // Change the text and tooltips of the actions
-    QString type = ui->dbTreeWidget->model()->data(ui->dbTreeWidget->currentIndex().sibling(ui->dbTreeWidget->currentIndex().row(), 1)).toString();
+    QString type = ui->dbTreeWidget->model()->data(ui->dbTreeWidget->currentIndex().sibling(ui->dbTreeWidget->currentIndex().row(), DbStructureModel::ColumnObjectType), Qt::EditRole).toString();
 
     if (type.isEmpty())
-    {
-        ui->editDeleteObjectAction->setIcon(QIcon(":icons/table_delete"));
-        ui->editModifyObjectAction->setIcon(QIcon(":icons/table_modify"));
-    } else {
-        ui->editDeleteObjectAction->setIcon(QIcon(QString(":icons/%1_delete").arg(type)));
-        ui->editModifyObjectAction->setIcon(QIcon(QString(":icons/%1_modify").arg(type)));
-    }
+        {
+            ui->editDeleteObjectAction->setIcon(QIcon(":icons/table_delete"));
+            ui->editModifyObjectAction->setIcon(QIcon(":icons/table_modify"));
+        } else {
+            ui->editDeleteObjectAction->setIcon(QIcon(QString(":icons/%1_delete").arg(type)));
+            ui->editModifyObjectAction->setIcon(QIcon(QString(":icons/%1_modify").arg(type)));
+        }
 
     if (type == "view") {
         ui->editDeleteObjectAction->setText(tr("Delete View"));
@@ -1535,15 +1553,24 @@ void MainWindow::changeTreeSelection()
     } else if(type == "table") {
         ui->editDeleteObjectAction->setText(tr("Delete Table"));
         ui->editModifyObjectAction->setText(tr("Modify Table"));
+    } else if(type == "database") {
+        ui->editDeleteObjectAction->setVisible(false);
+        ui->editModifyObjectAction->setVisible(false);
+        ui->fileDetachAction->setVisible(true);
+        ui->fileDetachAction->setEnabled(true);
+        return;
     } else {
         // Nothing to do for other types. Set the buttons not visible and return.
         ui->editDeleteObjectAction->setVisible(false);
         ui->editModifyObjectAction->setVisible(false);
+        ui->fileDetachAction->setVisible(false);
+        ui->actionEditCopyCreateStatement->setEnabled(true);
         return;
     }
 
     ui->editDeleteObjectAction->setVisible(true);
     ui->editModifyObjectAction->setVisible(true);
+    ui->actionEditCopyCreateStatement->setEnabled(true);
 
     // Activate actions
     ui->editDeleteObjectAction->setEnabled(!db.readOnly());
@@ -3048,6 +3075,32 @@ void MainWindow::switchToBrowseDataTab(sqlb::ObjectIdentifier tableToBrowse)
     if (ui->mainTab->indexOf(ui->browser) == -1)
         ui->mainTab->addTab(ui->browser, ui->browser->accessibleName());
     ui->mainTab->setCurrentWidget(ui->browser);
+}
+
+void MainWindow::fileDetachDbTree()
+{
+    fileDetachTreeViewSelected(ui->dbTreeWidget);
+}
+
+void MainWindow::fileDetachTreeSchemaDock()
+{
+    fileDetachTreeViewSelected(ui->treeSchemaDock);
+}
+
+void MainWindow::fileDetachTreeViewSelected(QTreeView* treeView)
+{
+    if (!treeView || !treeView->selectionModel()->hasSelection())
+    {
+        return;
+    }
+    sqlb::ObjectIdentifier attachedDatabase = sqlb::ObjectIdentifier();
+    // get the currently selected attached database from treeView parameter
+    // Cancel here if there is no selection
+    attachedDatabase.setSchema(treeView->model()->data(treeView->currentIndex().sibling(treeView->currentIndex().row(), DbStructureModel::ColumnSchema), Qt::EditRole).toString().toStdString());
+    attachedDatabase.setName(treeView->model()->data(treeView->currentIndex().sibling(treeView->currentIndex().row(), DbStructureModel::ColumnName), Qt::EditRole).toString().toStdString());
+
+    QString attached_as = QString::fromStdString(attachedDatabase.name());
+    db.detach(attached_as);
 }
 
 void MainWindow::copyCurrentCreateStatement()

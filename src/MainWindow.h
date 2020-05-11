@@ -5,6 +5,7 @@
 
 #include <memory>
 #include <QMainWindow>
+#include <QTreeView>
 
 struct BrowseDataTableSettings;
 class DbStructureModel;
@@ -125,6 +126,7 @@ protected:
     void dragEnterEvent(QDragEnterEvent *event) override;
     void dropEvent(QDropEvent *event) override;
     void resizeEvent(QResizeEvent *event) override;
+    void fileDetachTreeViewSelected(QTreeView* treeView);
 
 public slots:
     bool fileOpen(const QString& fileName = QString(), bool openFromProject = false, bool readOnly = false);
@@ -132,6 +134,8 @@ public slots:
     void dbState(bool dirty);
     void refresh();
     void switchToBrowseDataTab(sqlb::ObjectIdentifier tableToBrowse = sqlb::ObjectIdentifier());
+    void fileDetachDbTree();
+    void fileDetachTreeSchemaDock();
     void populateStructure(const QString& old_table = QString());
     void reloadSettings();
 

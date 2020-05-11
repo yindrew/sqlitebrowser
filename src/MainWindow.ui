@@ -2146,6 +2146,30 @@ You can drag SQL statements from the Schema column and drop them into the SQL ed
     <string>Browse Table</string>
    </property>
   </action>
+  <action name="fileDetachAction">
+   <property name="icon">
+    <iconset resource="icons/icons.qrc">
+     <normaloff>:/icons/db_detach</normaloff>:/icons/db_detach</iconset>
+   </property>
+   <property name="text">
+    <string>Detach Database</string>
+   </property>
+   <property name="toolTip">
+    <string>Detach database file attached to the current database connection</string>
+   </property>
+  </action>
+  <action name="actionPopupSchemaDockDetachDDetachDatabase">
+   <property name="icon">
+    <iconset resource="icons/icons.qrc">
+     <normaloff>:/icons/db_detach</normaloff>:/icons/db_detach</iconset>
+   </property>
+   <property name="text">
+    <string>Detach Database</string>
+   </property>
+   <property name="toolTip">
+    <string>Detach database file attached to the current database connection</string>
+   </property>
+  </action>
  </widget>
  <customwidgets>
   <customwidget>
@@ -2509,8 +2533,8 @@ You can drag SQL statements from the Schema column and drop them into the SQL ed
    <slot>createSchemaDockContextMenu(QPoint)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>111</x>
-     <y>261</y>
+     <x>824</x>
+     <y>561</y>
     </hint>
     <hint type="destinationlabel">
      <x>399</x>
@@ -2589,8 +2613,8 @@ You can drag SQL statements from the Schema column and drop them into the SQL ed
    <slot>loadPragmas()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>111</x>
-     <y>540</y>
+     <x>101</x>
+     <y>106</y>
     </hint>
     <hint type="destinationlabel">
      <x>-1</x>
@@ -2605,8 +2629,8 @@ You can drag SQL statements from the Schema column and drop them into the SQL ed
    <slot>savePragmas()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>111</x>
-     <y>540</y>
+     <x>101</x>
+     <y>106</y>
     </hint>
     <hint type="destinationlabel">
      <x>802</x>
@@ -2625,8 +2649,8 @@ You can drag SQL statements from the Schema column and drop them into the SQL ed
      <y>126</y>
     </hint>
     <hint type="destinationlabel">
-     <x>632</x>
-     <y>173</y>
+     <x>821</x>
+     <y>192</y>
     </hint>
    </hints>
   </connection>
@@ -2641,8 +2665,8 @@ You can drag SQL statements from the Schema column and drop them into the SQL ed
      <y>126</y>
     </hint>
     <hint type="destinationlabel">
-     <x>1028</x>
-     <y>230</y>
+     <x>1027</x>
+     <y>318</y>
     </hint>
    </hints>
   </connection>
@@ -2657,8 +2681,8 @@ You can drag SQL statements from the Schema column and drop them into the SQL ed
      <y>126</y>
     </hint>
     <hint type="destinationlabel">
-     <x>632</x>
-     <y>173</y>
+     <x>821</x>
+     <y>192</y>
     </hint>
    </hints>
   </connection>
@@ -2669,12 +2693,12 @@ You can drag SQL statements from the Schema column and drop them into the SQL ed
    <slot>setCurrentIndex(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>772</x>
-     <y>135</y>
+     <x>919</x>
+     <y>155</y>
     </hint>
     <hint type="destinationlabel">
-     <x>1028</x>
-     <y>230</y>
+     <x>1027</x>
+     <y>318</y>
     </hint>
    </hints>
   </connection>
@@ -2685,8 +2709,8 @@ You can drag SQL statements from the Schema column and drop them into the SQL ed
    <slot>closeSqlTab(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>91</x>
-     <y>259</y>
+     <x>96</x>
+     <y>106</y>
     </hint>
     <hint type="destinationlabel">
      <x>-1</x>
@@ -2701,8 +2725,8 @@ You can drag SQL statements from the Schema column and drop them into the SQL ed
    <slot>changeSqlTab(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>91</x>
-     <y>259</y>
+     <x>96</x>
+     <y>106</y>
     </hint>
     <hint type="destinationlabel">
      <x>-1</x>
@@ -2871,6 +2895,22 @@ You can drag SQL statements from the Schema column and drop them into the SQL ed
    </hints>
   </connection>
   <connection>
+   <sender>fileDetachAction</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>fileDetach()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>499</x>
+     <y>314</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
    <sender>actionEncryption</sender>
    <signal>triggered()</signal>
    <receiver>MainWindow</receiver>
@@ -3021,8 +3061,8 @@ You can drag SQL statements from the Schema column and drop them into the SQL ed
    <slot>renameSqlTab(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>330</x>
-     <y>372</y>
+     <x>101</x>
+     <y>106</y>
     </hint>
     <hint type="destinationlabel">
      <x>518</x>
@@ -3041,8 +3081,8 @@ You can drag SQL statements from the Schema column and drop them into the SQL ed
      <y>-1</y>
     </hint>
     <hint type="destinationlabel">
-     <x>887</x>
-     <y>44</y>
+     <x>693</x>
+     <y>54</y>
     </hint>
    </hints>
   </connection>
@@ -3105,8 +3145,8 @@ You can drag SQL statements from the Schema column and drop them into the SQL ed
      <y>314</y>
     </hint>
     <hint type="destinationlabel">
-     <x>959</x>
-     <y>44</y>
+     <x>693</x>
+     <y>54</y>
     </hint>
    </hints>
   </connection>
@@ -3213,8 +3253,8 @@ You can drag SQL statements from the Schema column and drop them into the SQL ed
    <slot>showStatusMessage5s(QString)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>85</x>
-     <y>133</y>
+     <x>90</x>
+     <y>160</y>
     </hint>
     <hint type="destinationlabel">
      <x>518</x>
@@ -3229,8 +3269,8 @@ You can drag SQL statements from the Schema column and drop them into the SQL ed
    <slot>showStatusMessage5s(QString)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>85</x>
-     <y>133</y>
+     <x>90</x>
+     <y>184</y>
     </hint>
     <hint type="destinationlabel">
      <x>518</x>
@@ -3245,8 +3285,8 @@ You can drag SQL statements from the Schema column and drop them into the SQL ed
    <slot>showStatusMessage5s(QString)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>85</x>
-     <y>133</y>
+     <x>90</x>
+     <y>208</y>
     </hint>
     <hint type="destinationlabel">
      <x>518</x>
@@ -3261,8 +3301,8 @@ You can drag SQL statements from the Schema column and drop them into the SQL ed
    <slot>showStatusMessage5s(QString)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>85</x>
-     <y>133</y>
+     <x>87</x>
+     <y>215</y>
     </hint>
     <hint type="destinationlabel">
      <x>518</x>
@@ -3277,8 +3317,8 @@ You can drag SQL statements from the Schema column and drop them into the SQL ed
    <slot>showStatusMessage5s(QString)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>85</x>
-     <y>133</y>
+     <x>90</x>
+     <y>239</y>
     </hint>
     <hint type="destinationlabel">
      <x>518</x>
@@ -3293,8 +3333,8 @@ You can drag SQL statements from the Schema column and drop them into the SQL ed
    <slot>showStatusMessage5s(QString)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>85</x>
-     <y>133</y>
+     <x>90</x>
+     <y>263</y>
     </hint>
     <hint type="destinationlabel">
      <x>518</x>
@@ -3309,8 +3349,8 @@ You can drag SQL statements from the Schema column and drop them into the SQL ed
    <slot>showStatusMessage5s(QString)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>85</x>
-     <y>133</y>
+     <x>90</x>
+     <y>315</y>
     </hint>
     <hint type="destinationlabel">
      <x>518</x>
@@ -3325,8 +3365,8 @@ You can drag SQL statements from the Schema column and drop them into the SQL ed
    <slot>showStatusMessage5s(QString)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>85</x>
-     <y>133</y>
+     <x>90</x>
+     <y>341</y>
     </hint>
     <hint type="destinationlabel">
      <x>518</x>
@@ -3341,8 +3381,8 @@ You can drag SQL statements from the Schema column and drop them into the SQL ed
    <slot>showStatusMessage5s(QString)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>85</x>
-     <y>133</y>
+     <x>82</x>
+     <y>367</y>
     </hint>
     <hint type="destinationlabel">
      <x>518</x>
@@ -3357,8 +3397,8 @@ You can drag SQL statements from the Schema column and drop them into the SQL ed
    <slot>showStatusMessage5s(QString)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>85</x>
-     <y>133</y>
+     <x>90</x>
+     <y>393</y>
     </hint>
     <hint type="destinationlabel">
      <x>518</x>
@@ -3373,8 +3413,8 @@ You can drag SQL statements from the Schema column and drop them into the SQL ed
    <slot>showStatusMessage5s(QString)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>85</x>
-     <y>133</y>
+     <x>90</x>
+     <y>417</y>
     </hint>
     <hint type="destinationlabel">
      <x>518</x>
@@ -3389,8 +3429,8 @@ You can drag SQL statements from the Schema column and drop them into the SQL ed
    <slot>showStatusMessage5s(QString)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>85</x>
-     <y>133</y>
+     <x>90</x>
+     <y>441</y>
     </hint>
     <hint type="destinationlabel">
      <x>518</x>
@@ -3405,8 +3445,8 @@ You can drag SQL statements from the Schema column and drop them into the SQL ed
    <slot>showStatusMessage5s(QString)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>85</x>
-     <y>133</y>
+     <x>90</x>
+     <y>467</y>
     </hint>
     <hint type="destinationlabel">
      <x>518</x>
@@ -3421,8 +3461,8 @@ You can drag SQL statements from the Schema column and drop them into the SQL ed
    <slot>showStatusMessage5s(QString)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>85</x>
-     <y>133</y>
+     <x>90</x>
+     <y>493</y>
     </hint>
     <hint type="destinationlabel">
      <x>518</x>
@@ -3437,8 +3477,8 @@ You can drag SQL statements from the Schema column and drop them into the SQL ed
    <slot>showStatusMessage5s(QString)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>85</x>
-     <y>133</y>
+     <x>90</x>
+     <y>519</y>
     </hint>
     <hint type="destinationlabel">
      <x>518</x>
@@ -3453,8 +3493,8 @@ You can drag SQL statements from the Schema column and drop them into the SQL ed
    <slot>showStatusMessage5s(QString)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>85</x>
-     <y>133</y>
+     <x>90</x>
+     <y>112</y>
     </hint>
     <hint type="destinationlabel">
      <x>518</x>
@@ -3469,8 +3509,8 @@ You can drag SQL statements from the Schema column and drop them into the SQL ed
    <slot>showStatusMessage5s(QString)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>85</x>
-     <y>133</y>
+     <x>90</x>
+     <y>112</y>
     </hint>
     <hint type="destinationlabel">
      <x>518</x>
@@ -3485,8 +3525,8 @@ You can drag SQL statements from the Schema column and drop them into the SQL ed
    <slot>showStatusMessage5s(QString)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>99</x>
-     <y>345</y>
+     <x>104</x>
+     <y>308</y>
     </hint>
     <hint type="destinationlabel">
      <x>518</x>
@@ -3542,6 +3582,22 @@ You can drag SQL statements from the Schema column and drop them into the SQL ed
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>actionPopupSchemaDockDetachDatabase</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>fileDetach()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>518</x>
+     <y>314</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>fileOpen()</slot>
@@ -3583,6 +3639,7 @@ You can drag SQL statements from the Schema column and drop them into the SQL ed
   <slot>loadProject()</slot>
   <slot>saveProject()</slot>
   <slot>fileAttach()</slot>
+  <slot>fileDetach()</slot>
   <slot>editEncryption()</slot>
   <slot>saveSqlFileAs()</slot>
   <slot>switchToBrowseDataTab()</slot>
