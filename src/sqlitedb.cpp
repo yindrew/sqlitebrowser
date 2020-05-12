@@ -301,37 +301,47 @@ bool DBBrowserDB::detach(QString attached_as)
 bool DBBrowserDB::attach(const QString& filePath, QString attach_as)
 {
     if(!_db)
+    {
         return false;
+    }
 
     waitForDbRelease();
 
+    // from https://www.sqlite.org/lang_detach.html
+    // In shared cache mode, attempting to attach the same database file more than once results in an error.
+    //
+    // So: no need for
     // Check if this file has already been attached and abort if this is the case
-    QFileInfo fi(filePath);
-    bool ok = executeSQL("PRAGMA database_list", false, true, [fi](int, std::vector<QByteArray> values, std::vector<QByteArray>) -> bool {
-        QFileInfo path(values.at(2));
-        if(fi == path)
-        {
-            QString schema = values.at(1);
-            QMessageBox::information(nullptr, qApp->applicationName(), tr("This database has already been attached. Its schema name is '%1'.").arg(schema));
-            return true;
-        }
+//    QFileInfo fi(filePath);
+//    bool ok = executeSQL("PRAGMA database_list", false, true, [fi](int, std::vector<QByteArray> values, std::vector<QByteArray>) -> bool {
+//        QFileInfo path(values.at(2));
+//        if(fi == path)
+//        {
+//            QString schema = values.at(1);
+//            QMessageBox::information(nullptr, qApp->applicationName(), tr("This database has already been attached. Its schema name is '%1'.").arg(schema));
+//            return true;
+//        }
 
-        return false;
-    });
+//        return false;
+//    });
 
-    if(ok == false)
-        return false;
+//    if(ok == false)
+//        return false;
 
     // Ask for name to be given to the attached database if none was provided
     if(attach_as.isEmpty())
+    {
         attach_as = QInputDialog::getText(nullptr,
                                           qApp->applicationName(),
                                           tr("Please specify the database name under which you want to access the attached database"),
                                           QLineEdit::Normal,
                                           QFileInfo(filePath).baseName()
                                           ).trimmed();
+    }
     if(attach_as.isNull())
+    {
         return false;
+    }
 
 #ifdef ENABLE_SQLCIPHER
     // Try encryption settings
