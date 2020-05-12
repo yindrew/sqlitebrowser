@@ -2158,7 +2158,7 @@ You can drag SQL statements from the Schema column and drop them into the SQL ed
     <string>Detach database file attached to the current database connection</string>
    </property>
   </action>
-  <action name="actionPopupSchemaDockDetachDDetachDatabase">
+  <action name="actionPopupSchemaDockDetachDatabase">
    <property name="icon">
     <iconset resource="icons/icons.qrc">
      <normaloff>:/icons/db_detach</normaloff>:/icons/db_detach</iconset>
@@ -2898,7 +2898,7 @@ You can drag SQL statements from the Schema column and drop them into the SQL ed
    <sender>fileDetachAction</sender>
    <signal>triggered()</signal>
    <receiver>MainWindow</receiver>
-   <slot>fileDetach()</slot>
+   <slot>fileDetachDbTree()</slot>
    <hints>
     <hint type="sourcelabel">
      <x>-1</x>
@@ -3586,7 +3586,7 @@ You can drag SQL statements from the Schema column and drop them into the SQL ed
    <sender>actionPopupSchemaDockDetachDatabase</sender>
    <signal>triggered()</signal>
    <receiver>MainWindow</receiver>
-   <slot>fileDetach()</slot>
+   <slot>fileDetachTreeSchemaDock()</slot>
    <hints>
     <hint type="sourcelabel">
      <x>-1</x>
@@ -3639,7 +3639,8 @@ You can drag SQL statements from the Schema column and drop them into the SQL ed
   <slot>loadProject()</slot>
   <slot>saveProject()</slot>
   <slot>fileAttach()</slot>
-  <slot>fileDetach()</slot>
+  <slot>fileDetachDbTree()</slot>
+  <slot>fileDetachTreeSchemaDock()</slot>
   <slot>editEncryption()</slot>
   <slot>saveSqlFileAs()</slot>
   <slot>switchToBrowseDataTab()</slot>
