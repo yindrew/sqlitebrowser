@@ -128,6 +128,16 @@ protected:
     void resizeEvent(QResizeEvent *event) override;
     void fileDetachTreeViewSelected(QTreeView* treeView);
 
+    /**
+      returns value of the DbStructureModel::ColumnObjectType of the model that is
+      associated with the actual selected node of the given treeView
+
+      returns empty QString on error or if there is no value found
+
+      \param treeView the QTreeView widget that holds the DbStructureModel and has a node selected
+    **/
+    QString getDbStructureObjectTypeFromTreeViewSelected(QTreeView* treeView);
+
 public slots:
     bool fileOpen(const QString& fileName = QString(), bool openFromProject = false, bool readOnly = false);
     void logSql(const QString &sql, int msgtype);

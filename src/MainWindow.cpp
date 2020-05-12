@@ -832,7 +832,8 @@ void MainWindow::deleteObject()
     // Get name and type of object to delete
     sqlb::ObjectIdentifier name(ui->dbTreeWidget->model()->data(ui->dbTreeWidget->currentIndex().sibling(ui->dbTreeWidget->currentIndex().row(), DbStructureModel::ColumnSchema), Qt::EditRole).toString().toStdString(),
                                 ui->dbTreeWidget->model()->data(ui->dbTreeWidget->currentIndex().sibling(ui->dbTreeWidget->currentIndex().row(), DbStructureModel::ColumnName), Qt::EditRole).toString().toStdString());
-    QString type = ui->dbTreeWidget->model()->data(ui->dbTreeWidget->currentIndex().sibling(ui->dbTreeWidget->currentIndex().row(), DbStructureModel::ColumnObjectType), Qt::EditRole).toString();
+    QString type = getDbStructureObjectTypeFromTreeViewSelected(ui->dbTreeWidget);
+    //ui->dbTreeWidget->model()->data(ui->dbTreeWidget->currentIndex().sibling(ui->dbTreeWidget->currentIndex().row(), DbStructureModel::ColumnObjectType), Qt::EditRole).toString();
 
     // Due to different grammar in languages (e.g. gender or declension), each message must be given separately to translation.
     QString message;
@@ -879,7 +880,8 @@ void MainWindow::editObject()
     // Get name and type of the object to edit
     sqlb::ObjectIdentifier name(ui->dbTreeWidget->model()->data(ui->dbTreeWidget->currentIndex().sibling(ui->dbTreeWidget->currentIndex().row(), DbStructureModel::ColumnSchema), Qt::EditRole).toString().toStdString(),
                                 ui->dbTreeWidget->model()->data(ui->dbTreeWidget->currentIndex().sibling(ui->dbTreeWidget->currentIndex().row(), DbStructureModel::ColumnName), Qt::EditRole).toString().toStdString());
-    QString type = ui->dbTreeWidget->model()->data(ui->dbTreeWidget->currentIndex().sibling(ui->dbTreeWidget->currentIndex().row(), DbStructureModel::ColumnObjectType), Qt::EditRole).toString();
+    QString type = getDbStructureObjectTypeFromTreeViewSelected(ui->dbTreeWidget);
+    // ui->dbTreeWidget->model()->data(ui->dbTreeWidget->currentIndex().sibling(ui->dbTreeWidget->currentIndex().row(), DbStructureModel::ColumnObjectType), Qt::EditRole).toString();
 
     if(type == "table")
     {
@@ -943,6 +945,17 @@ void MainWindow::editObject()
                      "https://www.sqlite.org/lang_createtrigger.html",
                      /* autoRun */ false);
     }
+}
+
+
+QString MainWindow::getDbStructureObjectTypeFromTreeViewSelected(QTreeView* treeView)
+{
+    QString type = QString();
+    if (treeView)
+    {
+        type = treeView->model()->data(treeView->currentIndex().sibling(treeView->currentIndex().row(), DbStructureModel::ColumnObjectType), Qt::EditRole).toString();
+    }
+    return type;
 }
 
 void MainWindow::helpWhatsThis()
@@ -1317,7 +1330,8 @@ void MainWindow::exportTableToCSV()
     sqlb::ObjectIdentifier current_table;
     if(ui->mainTab->currentWidget() == ui->structure)
     {
-        QString type = ui->dbTreeWidget->model()->data(ui->dbTreeWidget->currentIndex().sibling(ui->dbTreeWidget->currentIndex().row(), DbStructureModel::ColumnObjectType)).toString();
+        QString type = getDbStructureObjectTypeFromTreeViewSelected(ui->dbTreeWidget);
+        // ui->dbTreeWidget->model()->data(ui->dbTreeWidget->currentIndex().sibling(ui->dbTreeWidget->currentIndex().row(), DbStructureModel::ColumnObjectType)).toString();
         if(type == "table" || type == "view")
         {
             QString schema = ui->dbTreeWidget->model()->data(ui->dbTreeWidget->currentIndex().sibling(ui->dbTreeWidget->currentIndex().row(), DbStructureModel::ColumnSchema)).toString();
@@ -1339,7 +1353,8 @@ void MainWindow::exportTableToJson()
     sqlb::ObjectIdentifier current_table;
     if(ui->mainTab->currentWidget() == ui->structure)
     {
-        QString type = ui->dbTreeWidget->model()->data(ui->dbTreeWidget->currentIndex().sibling(ui->dbTreeWidget->currentIndex().row(), DbStructureModel::ColumnObjectType)).toString();
+        QString type = getDbStructureObjectTypeFromTreeViewSelected(ui->dbTreeWidget);
+        // ui->dbTreeWidget->model()->data(ui->dbTreeWidget->currentIndex().sibling(ui->dbTreeWidget->currentIndex().row(), DbStructureModel::ColumnObjectType)).toString();
         if(type == "table" || type == "view")
         {
             QString schema = ui->dbTreeWidget->model()->data(ui->dbTreeWidget->currentIndex().sibling(ui->dbTreeWidget->currentIndex().row(), DbStructureModel::ColumnSchema)).toString();
@@ -1481,12 +1496,17 @@ void MainWindow::openPreferences()
 void MainWindow::createTreeContextMenu(const QPoint &qPoint)
 {
     if(!ui->dbTreeWidget->selectionModel()->hasSelection())
+    {
         return;
+    }
 
-    QString type = ui->dbTreeWidget->model()->data(ui->dbTreeWidget->currentIndex().sibling(ui->dbTreeWidget->currentIndex().row(), 1)).toString();
+    QString type = getDbStructureObjectTypeFromTreeViewSelected(ui->dbTreeWidget);
+    // ui->dbTreeWidget->model()->data(ui->dbTreeWidget->currentIndex().sibling(ui->dbTreeWidget->currentIndex().row(), 1)).toString();
 
     if(type == "table" || type == "view" || type == "trigger" || type == "index" || type == "database")
+    {
         popupTableMenu->exec(ui->dbTreeWidget->mapToGlobal(qPoint));
+    }
 }
 
 //** DB Schema Dock Context Menu
@@ -1496,7 +1516,8 @@ void MainWindow::createSchemaDockContextMenu(const QPoint &qPoint)
     bool enable_detach_file = false;
     if(ui->treeSchemaDock->selectionModel()->hasSelection())
     {
-        QString type = ui->treeSchemaDock->model()->data(ui->treeSchemaDock->currentIndex().sibling(ui->treeSchemaDock->currentIndex().row(), DbStructureModel::ColumnObjectType), Qt::EditRole).toString();
+        QString type = getDbStructureObjectTypeFromTreeViewSelected(ui->treeSchemaDock);
+        // ui->treeSchemaDock->model()->data(ui->treeSchemaDock->currentIndex().sibling(ui->treeSchemaDock->currentIndex().row(), DbStructureModel::ColumnObjectType), Qt::EditRole).toString();
         if(type == "table" || type == "view")
         {
             enable_browse_table = true;
@@ -1530,7 +1551,8 @@ void MainWindow::changeTreeSelection()
     }
 
     // Change the text and tooltips of the actions
-    QString type = ui->dbTreeWidget->model()->data(ui->dbTreeWidget->currentIndex().sibling(ui->dbTreeWidget->currentIndex().row(), DbStructureModel::ColumnObjectType), Qt::EditRole).toString();
+    QString type = getDbStructureObjectTypeFromTreeViewSelected(ui->dbTreeWidget);
+    // ui->dbTreeWidget->model()->data(ui->dbTreeWidget->currentIndex().sibling(ui->dbTreeWidget->currentIndex().row(), DbStructureModel::ColumnObjectType), Qt::EditRole).toString();
 
     if (type.isEmpty())
         {
@@ -3093,6 +3115,7 @@ void MainWindow::fileDetachTreeViewSelected(QTreeView* treeView)
     {
         return;
     }
+
     sqlb::ObjectIdentifier attachedDatabase = sqlb::ObjectIdentifier();
     // get the currently selected attached database from treeView parameter
     // Cancel here if there is no selection
@@ -3100,7 +3123,10 @@ void MainWindow::fileDetachTreeViewSelected(QTreeView* treeView)
     attachedDatabase.setName(treeView->model()->data(treeView->currentIndex().sibling(treeView->currentIndex().row(), DbStructureModel::ColumnName), Qt::EditRole).toString().toStdString());
 
     QString attached_as = QString::fromStdString(attachedDatabase.name());
-    db.detach(attached_as);
+    if (db.detach(attached_as))
+    {
+        isProjectModified = true;
+    }
 }
 
 void MainWindow::copyCurrentCreateStatement()
