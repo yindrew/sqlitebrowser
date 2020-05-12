@@ -283,7 +283,7 @@ bool DBBrowserDB::detach(QString attached_as)
 
     waitForDbRelease();
 
-    // Dettach database
+    // detach database
     if(!executeSQL("DETACH " + sqlb::escapeIdentifier(attached_as.toStdString()), false))
     {
         QMessageBox::warning(nullptr, qApp->applicationName(), lastErrorMessage);
