@@ -21,6 +21,7 @@ CONFIG(unittest) {
 }
 
 HEADERS += \
+    dbstructureqitemviewfacade.h \
     sqlitedb.h \
     MainWindow.h \
     EditIndexDialog.h \
@@ -81,6 +82,7 @@ HEADERS += \
     sql/parser/sqlite3_parser.hpp
 
 SOURCES += \
+    dbstructureqitemviewfacade.cpp \
     sqlitedb.cpp \
     MainWindow.cpp \
     EditIndexDialog.cpp \

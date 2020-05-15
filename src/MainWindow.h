@@ -1,6 +1,7 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#include "dbstructureqitemviewfacade.h"
 #include "sqlitedb.h"
 
 #include <memory>
@@ -83,6 +84,16 @@ private:
 
     DbStructureModel* dbStructureModel;
 
+    /**
+     * @brief dbSelected provides a simple read only interface to the actual selected node of ui->dbTreeWidget
+     */
+    DbStructureQItemViewFacade *dbSelected;
+
+    /**
+     * @brief dockDbSelected provides a simple read only interface to the actual selected node of ui->treeSchemaDock
+     */
+    DbStructureQItemViewFacade *dockDbSelected;
+
     static const int MaxRecentFiles = 5;
     QAction *recentFileActs[MaxRecentFiles];
     QAction *recentSeparatorAct;
@@ -127,16 +138,6 @@ protected:
     void dropEvent(QDropEvent *event) override;
     void resizeEvent(QResizeEvent *event) override;
     void fileDetachTreeViewSelected(QTreeView* treeView);
-
-    /**
-      returns value of the DbStructureModel::ColumnObjectType of the model that is
-      associated with the actual selected node of the given treeView
-
-      returns empty QString on error or if there is no value found
-
-      \param treeView the QTreeView widget that holds the DbStructureModel and has a node selected
-    **/
-    QString getDbStructureObjectTypeFromTreeViewSelected(QTreeView* treeView);
 
 public slots:
     bool fileOpen(const QString& fileName = QString(), bool openFromProject = false, bool readOnly = false);
