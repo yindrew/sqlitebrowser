@@ -26,7 +26,7 @@ SqlTextEdit::SqlTextEdit(QWidget* parent) :
     registerImage(SqlUiLexer::ApiCompleterIconIdFunction, QImage(":/icons/function"));
     registerImage(SqlUiLexer::ApiCompleterIconIdTable, QImage(":/icons/table"));
     registerImage(SqlUiLexer::ApiCompleterIconIdColumn, QImage(":/icons/field"));
-    registerImage(SqlUiLexer::ApiCompleterIconIdSchema, QImage(":/icons/database"));
+    registerImage(SqlUiLexer::ApiCompleterIconIdSchema, QImage(":/icons/schema")); // ?hn rename to "schema"
 
     // Remove command bindings that would interfere with our shortcutToggleComment
     QsciCommand * command = standardCommands()->boundTo(Qt::ControlModifier+Qt::Key_Slash);

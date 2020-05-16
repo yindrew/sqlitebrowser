@@ -208,8 +208,8 @@ QVariant RemoteModel::data(const QModelIndex& index, int role) const
             return QImage(":/icons/folder_user");
         else if(type == "folder")
             return QImage(":/icons/folder");
-        else if(type == "database")
-            return QImage(":/icons/database");
+        else if(type == "schema")
+            return QImage(":/icons/schema");  // ?hn rename to "schema"
     } else if(role == Qt::DisplayRole) {
         // Display role?
 

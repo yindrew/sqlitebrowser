@@ -1927,6 +1927,9 @@ void DBBrowserDB::updateSchema()
         // Always add the schema to the map. This makes sure it's even then added when there are no objects in the database
         schemata[schema_name] = objectMap();
 
+        sqlb::ObjectPtr object;
+        // object = sqlb::Da
+
         // Get a list of all the tables for the current database schema. We need to do this differently for normal databases and the temporary schema
         // because SQLite doesn't understand the "temp.sqlite_master" notation.
         std::string statement;

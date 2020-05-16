@@ -1486,7 +1486,7 @@ void MainWindow::createTreeContextMenu(const QPoint &qPoint)
     }
 
     QString type = dbSelected->objectType();
-    if(type == "table" || type == "view" || type == "trigger" || type == "index" || type == "database")
+    if(type == "table" || type == "view" || type == "trigger" || type == "index" || type == "schema")
     {
         popupTableMenu->exec(ui->dbTreeWidget->mapToGlobal(qPoint));
     }
@@ -1504,7 +1504,7 @@ void MainWindow::createSchemaDockContextMenu(const QPoint &qPoint)
         {
             enable_browse_table = true;
         }
-        if(type == "database")
+        if(type == "schema")
         {
             enable_detach_file = true;
         }
@@ -1556,7 +1556,7 @@ void MainWindow::changeTreeSelection()
     } else if(type == "table") {
         ui->editDeleteObjectAction->setText(tr("Delete Table"));
         ui->editModifyObjectAction->setText(tr("Modify Table"));
-    } else if(type == "database") {
+    } else if(type == "schema") {
         ui->editDeleteObjectAction->setVisible(false);
         ui->editModifyObjectAction->setVisible(false);
         ui->fileDetachAction->setVisible(true);
@@ -2865,6 +2865,7 @@ void MainWindow::saveProject(const QString& currentFilename)
 
         // Attached databases
         xml.writeStartElement("attached");
+        // ?hn why don't using m_db.schemata[]? IMHO MainWindow should never execute any sql for internal purposes
         db.executeSQL("PRAGMA database_list;", false, true, [&xml](int, std::vector<QByteArray> values, std::vector<QByteArray>) -> bool {
             auto schema = values.at(1);
             if(schema != "main" && schema != "temp")
