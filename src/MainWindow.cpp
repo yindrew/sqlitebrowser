@@ -669,7 +669,9 @@ void MainWindow::populateTable()
 {
     // Early exit if the Browse Data tab isn't visible as there is no need to update it in this case
     if(ui->mainTab->currentWidget() != ui->browser)
+    {
         return;
+    }
 
     QApplication::setOverrideCursor(Qt::WaitCursor);
     ui->tableBrowser->updateTable();
@@ -1359,7 +1361,6 @@ void MainWindow::dbState(bool dirty)
 {
     ui->fileSaveAction->setEnabled(dirty);
     ui->fileRevertAction->setEnabled(dirty);
-    ui->fileAttachAction->setEnabled(db.isOpen() && !dirty);
 }
 
 void MainWindow::fileSave()
@@ -1488,6 +1489,7 @@ void MainWindow::createTreeContextMenu(const QPoint &qPoint)
     QString type = dbSelected->objectType();
     if(type == "table" || type == "view" || type == "trigger" || type == "index" || type == "schema")
     {
+        changeTreeSelection();
         popupTableMenu->exec(ui->dbTreeWidget->mapToGlobal(qPoint));
     }
 }
