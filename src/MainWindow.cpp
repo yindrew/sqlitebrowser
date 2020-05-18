@@ -1489,6 +1489,7 @@ void MainWindow::createTreeContextMenu(const QPoint &qPoint)
     QString type = dbSelected->objectType();
     if(type == "table" || type == "view" || type == "trigger" || type == "index" || type == "schema")
     {
+        // needed for first click on treeView as for first time change QItemSelectionModel::currentChanged doesn't fire
         changeTreeSelection();
         popupTableMenu->exec(ui->dbTreeWidget->mapToGlobal(qPoint));
     }
