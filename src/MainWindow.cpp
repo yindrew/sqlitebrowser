@@ -1534,6 +1534,7 @@ void MainWindow::changeTreeSelection()
 
     // Change the text and tooltips of the actions
     QString type = dbSelected->objectType();
+    QString schema = dbSelected->schema();
 
     if (type.isEmpty())
         {
@@ -1560,7 +1561,7 @@ void MainWindow::changeTreeSelection()
         ui->editDeleteObjectAction->setVisible(false);
         ui->editModifyObjectAction->setVisible(false);
         ui->fileDetachAction->setVisible(true);
-        ui->fileDetachAction->setEnabled(true);
+        ui->fileDetachAction->setEnabled(!(schema == "main" || schema == "temp"));
         return;
     } else {
         // Nothing to do for other types. Set the buttons not visible and return.
