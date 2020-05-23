@@ -11,7 +11,6 @@
 #include <unordered_map>
 #include <map>
 
-
 DbStructureModel::DbStructureModel(DBBrowserDB& db, QObject* parent)
     : QAbstractItemModel(parent),
       m_db(db),
@@ -50,9 +49,6 @@ QVariant DbStructureModel::data(const QModelIndex& index, int role) const
         // For the display role and the browsable branch of the tree we want to show the column name including the schema name if necessary (i.e.
         // for schemata != "main"). For the normal structure branch of the tree we don't want to add the schema name because it's already obvious from
         // the position of the item in the tree.
-        if(index.column() == ColumnName && data(index.sibling(index.row(), ColumnObjectType), Qt::EditRole).toString() =="schema" ){
-            return item->text(index.column()) + " []"; // ?hn - remainder to add fileinfo later
-        } else
         if(index.column() == ColumnName && item->parent() == browsablesRootItem)
             return QString::fromStdString(sqlb::ObjectIdentifier(item->text(ColumnSchema).toStdString(), item->text(ColumnName).toStdString()).toDisplayString());
         else
@@ -170,22 +166,18 @@ void DbStructureModel::reloadData()
 
     // Make sure to always load the main schema first
     QTreeWidgetItem* itemAll = new QTreeWidgetItem(rootItem);
-    itemAll->setIcon(ColumnName, IconCache::get("schema")); // ?hn rename to "schema"
-    itemAll->setText(ColumnName, tr("All")); // hn? why does schema name and name differ - shouldn't this be solved on DisplayRole?
-    itemAll->setText(ColumnObjectType, "schema");
-    itemAll->setText(ColumnSchema, "main");
-    itemAll->setText(ColumnUrl,""); // to do: find out, where to find database filename
+    itemAll->setIcon(ColumnName, IconCache::get("database"));
+    itemAll->setText(ColumnName, tr("All"));
+    itemAll->setText(ColumnObjectType, "database");
     buildTree(itemAll, "main");
 
     // Add the temporary database as a node if it isn't empty. Make sure it's always second if it exists.
     if(!m_db.schemata["temp"].empty())
     {
         QTreeWidgetItem* itemTemp = new QTreeWidgetItem(itemAll);
-        itemTemp->setIcon(ColumnName, IconCache::get("schema")); // ?hn rename to "schema"
-        itemTemp->setText(ColumnName, tr("Temporary")); // hn? why does schema name and name differ - shouldn't this be solved on DisplayRole?
-        itemTemp->setText(ColumnObjectType, "schema");
-        itemTemp->setText(ColumnSchema, "temp");
-        itemTemp->setText(ColumnUrl,""); // hn? is there any useful information
+        itemTemp->setIcon(ColumnName, IconCache::get("database"));
+        itemTemp->setText(ColumnName, tr("Temporary"));
+        itemTemp->setText(ColumnObjectType, "database");
         buildTree(itemTemp, "temp");
     }
 
@@ -196,9 +188,9 @@ void DbStructureModel::reloadData()
         if(it.first != "main" && it.first != "temp")
         {
             QTreeWidgetItem* itemSchema = new QTreeWidgetItem(itemAll);
-            itemSchema->setIcon(ColumnName, IconCache::get("schema")); // ?hn rename to "schema"
+            itemSchema->setIcon(ColumnName, IconCache::get("database"));
             itemSchema->setText(ColumnName, QString::fromStdString(it.first));
-            itemSchema->setText(ColumnObjectType, "schema");
+            itemSchema->setText(ColumnObjectType, "database");
             buildTree(itemSchema, it.first);
         }
     }
@@ -233,7 +225,7 @@ QMimeData* DbStructureModel::mimeData(const QModelIndexList& indices) const
             // For names, export a (qualified) (escaped) identifier of the item for statement composition in SQL editor.
             if(objectType == "field")
                 namesData.append(getNameForDropping(item->text(ColumnSchema), item->parent()->text(ColumnName), item->text(ColumnName)));
-            else if(objectType == "schema")
+            else if(objectType == "database")
                 namesData.append(getNameForDropping(item->text(ColumnName), "", ""));
             else if(!objectType.isEmpty())
                 namesData.append(getNameForDropping(item->text(ColumnSchema), item->text(ColumnName), ""));

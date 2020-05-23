@@ -20,7 +20,7 @@ VacuumDialog::VacuumDialog(DBBrowserDB* _db, QWidget* parent) :
     {
         QTreeWidgetItem* item = new QTreeWidgetItem(ui->treeDatabases);
         item->setText(0, QString::fromStdString(it.first));
-        item->setIcon(0, QIcon(QString(":icons/schema"))); // ?hn rename to "schema"
+        item->setIcon(0, QIcon(QString(":icons/database")));
         ui->treeDatabases->addTopLevelItem(item);
     }
 

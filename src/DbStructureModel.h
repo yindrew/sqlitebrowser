@@ -28,18 +28,6 @@ public:
     QMimeData* mimeData(const QModelIndexList& indices) const override;
     bool dropMimeData(const QMimeData* data, Qt::DropAction action, int row, int column, const QModelIndex& parent) override;
 
-    /*!
-     * \enum DbStructureModel::Columns
-     *
-     *  The Columns of a DbStructureModel Item.
-     *
-     * \value ColumnName Name of the datbase structure object (e.g. tablename, fieldname, indexname, databasename (alias, not filename!)
-     * \value ColumnObjectType Type of the datbase structure object as QString ("table", "view", "index", "trigger", "field")
-     * \value ColumnDataType Datatype of the database structure object itself. todo: investigate and document fully
-     * \value ColumnSQL Original sql statement of the database structure object.
-     * \value ColumnSchema Name of the datbase to which the database structure object belongs (alias, not filename!).
-     * \value ColumnUrl Filename or url of the datbase of the object that represents the database.
-     */
     enum Columns
     {
         ColumnName,
@@ -47,7 +35,6 @@ public:
         ColumnDataType,
         ColumnSQL,
         ColumnSchema,
-        ColumnUrl
     };
 
 public slots:

@@ -25,9 +25,6 @@ enum LogMessageType
     kLogMsg_ErrorLog
 };
 
-// ?hn why isn't schema an object like table or index?
-// ?hn why is schema no type?
-// ?hn why is schema in DbStructureModel addresed to the string 'database'?
 using objectMap = std::multimap<std::string, sqlb::ObjectPtr>;  // Maps from object type (table, index, view, trigger) to a pointer to the object representation
 using schemaMap = std::map<std::string, objectMap>;             // Maps from the schema name (main, temp, attached schemas) to the object map for that schema
 
