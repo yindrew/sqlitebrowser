@@ -2533,8 +2533,8 @@ You can drag SQL statements from the Schema column and drop them into the SQL ed
    <slot>createSchemaDockContextMenu(QPoint)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>824</x>
-     <y>561</y>
+     <x>111</x>
+     <y>261</y>
     </hint>
     <hint type="destinationlabel">
      <x>399</x>
