@@ -1,1 +1,2 @@
-testing.
+June 21 - I did a tutorial on a lot of qt gui functions. Trying to figure out how widgets work in tangent to each other
+June 22- Went on a hike. Didn't do much today.
