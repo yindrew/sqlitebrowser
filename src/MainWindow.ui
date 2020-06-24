@@ -14,7 +14,7 @@
    <string>DB Browser for SQLite</string>
   </property>
   <property name="windowIcon">
-   <iconset>
+   <iconset resource="icons/icons.qrc">
     <normaloff>:/icons/appicon</normaloff>:/icons/appicon</iconset>
   </property>
   <widget class="QWidget" name="centralwidget">
@@ -34,7 +34,7 @@
     <property name="bottomMargin">
      <number>3</number>
     </property>
-    <item>
+    <item alignment="Qt::AlignHCenter">
      <widget class="QTabWidget" name="mainTab">
       <property name="currentIndex">
        <number>3</number>
@@ -43,7 +43,7 @@
        <bool>true</bool>
       </property>
       <property name="tabBarAutoHide">
-       <bool>true</bool>
+       <bool>false</bool>
       </property>
       <widget class="QWidget" name="structure">
        <property name="accessibleName">
@@ -734,6 +734,25 @@ You can drag SQL statements from an object row and drop them into other applicat
         </item>
        </layout>
       </widget>
+      <widget class="QWidget" name="dashboard">
+       <attribute name="title">
+        <string>Dashboard</string>
+       </attribute>
+       <layout class="QVBoxLayout" name="verticalLayout_10">
+        <property name="leftMargin">
+         <number>3</number>
+        </property>
+        <property name="topMargin">
+         <number>3</number>
+        </property>
+        <property name="rightMargin">
+         <number>3</number>
+        </property>
+        <property name="bottomMargin">
+         <number>3</number>
+        </property>
+       </layout>
+      </widget>
      </widget>
     </item>
    </layout>
@@ -1114,7 +1133,7 @@ You can drag SQL statements from the Schema column and drop them into the SQL ed
   </widget>
   <action name="fileNewAction">
    <property name="icon">
-    <iconset>
+    <iconset resource="icons/icons.qrc">
      <normaloff>:/icons/db_new</normaloff>:/icons/db_new</iconset>
    </property>
    <property name="text">
@@ -1138,7 +1157,7 @@ You can drag SQL statements from the Schema column and drop them into the SQL ed
   </action>
   <action name="fileOpenAction">
    <property name="icon">
-    <iconset>
+    <iconset resource="icons/icons.qrc">
      <normaloff>:/icons/db_open</normaloff>:/icons/db_open</iconset>
    </property>
    <property name="text">
@@ -1165,7 +1184,7 @@ You can drag SQL statements from the Schema column and drop them into the SQL ed
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset>
+    <iconset resource="icons/icons.qrc">
      <normaloff>:/icons/close</normaloff>:/icons/close</iconset>
    </property>
    <property name="text">
@@ -1192,7 +1211,7 @@ You can drag SQL statements from the Schema column and drop them into the SQL ed
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset>
+    <iconset resource="icons/icons.qrc">
      <normaloff>:/icons/db_revert</normaloff>:/icons/db_revert</iconset>
    </property>
    <property name="text">
@@ -1216,7 +1235,7 @@ You can drag SQL statements from the Schema column and drop them into the SQL ed
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset>
+    <iconset resource="icons/icons.qrc">
      <normaloff>:/icons/db_save</normaloff>:/icons/db_save</iconset>
    </property>
    <property name="text">
@@ -1330,7 +1349,7 @@ You can drag SQL statements from the Schema column and drop them into the SQL ed
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset>
+    <iconset resource="icons/icons.qrc">
      <normaloff>:/icons/table_create</normaloff>:/icons/table_create</iconset>
    </property>
    <property name="text">
@@ -1348,7 +1367,7 @@ You can drag SQL statements from the Schema column and drop them into the SQL ed
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset>
+    <iconset resource="icons/icons.qrc">
      <normaloff>:/icons/table_delete</normaloff>:/icons/table_delete</iconset>
    </property>
    <property name="text">
@@ -1369,7 +1388,7 @@ You can drag SQL statements from the Schema column and drop them into the SQL ed
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset>
+    <iconset resource="icons/icons.qrc">
      <normaloff>:/icons/table_modify</normaloff>:/icons/table_modify</iconset>
    </property>
    <property name="text">
@@ -1387,7 +1406,7 @@ You can drag SQL statements from the Schema column and drop them into the SQL ed
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset>
+    <iconset resource="icons/icons.qrc">
      <normaloff>:/icons/index_create</normaloff>:/icons/index_create</iconset>
    </property>
    <property name="text">
@@ -1402,7 +1421,7 @@ You can drag SQL statements from the Schema column and drop them into the SQL ed
   </action>
   <action name="viewPreferencesAction">
    <property name="icon">
-    <iconset>
+    <iconset resource="icons/icons.qrc">
      <normaloff>:/icons/settings</normaloff>:/icons/settings</iconset>
    </property>
    <property name="text">
@@ -1423,7 +1442,7 @@ You can drag SQL statements from the Schema column and drop them into the SQL ed
     <bool>true</bool>
    </property>
    <property name="icon">
-    <iconset>
+    <iconset resource="icons/icons.qrc">
      <normaloff>:/icons/toolbar</normaloff>:/icons/toolbar</iconset>
    </property>
    <property name="text">
@@ -1438,7 +1457,7 @@ You can drag SQL statements from the Schema column and drop them into the SQL ed
   </action>
   <action name="helpWhatsThisAction">
    <property name="icon">
-    <iconset>
+    <iconset resource="icons/icons.qrc">
      <normaloff>:/icons/whatis</normaloff>:/icons/whatis</iconset>
    </property>
    <property name="text">
@@ -1466,7 +1485,7 @@ You can drag SQL statements from the Schema column and drop them into the SQL ed
   </action>
   <action name="actionSqlOpenTab">
    <property name="icon">
-    <iconset>
+    <iconset resource="icons/icons.qrc">
      <normaloff>:/icons/open_tab</normaloff>:/icons/open_tab</iconset>
    </property>
    <property name="text">
@@ -1481,7 +1500,7 @@ You can drag SQL statements from the Schema column and drop them into the SQL ed
   </action>
   <action name="actionExecuteSql">
    <property name="icon">
-    <iconset>
+    <iconset resource="icons/icons.qrc">
      <normaloff>:/icons/run</normaloff>:/icons/run</iconset>
    </property>
    <property name="text">
@@ -1499,7 +1518,7 @@ You can drag SQL statements from the Schema column and drop them into the SQL ed
   </action>
   <action name="actionSqlOpenFile">
    <property name="icon">
-    <iconset>
+    <iconset resource="icons/icons.qrc">
      <normaloff>:/icons/document_open</normaloff>:/icons/document_open</iconset>
    </property>
    <property name="text">
@@ -1511,7 +1530,7 @@ You can drag SQL statements from the Schema column and drop them into the SQL ed
   </action>
   <action name="actionSqlSaveFile">
    <property name="icon">
-    <iconset>
+    <iconset resource="icons/icons.qrc">
      <normaloff>:/icons/save_sql</normaloff>:/icons/save_sql</iconset>
    </property>
    <property name="text">
@@ -1523,7 +1542,7 @@ You can drag SQL statements from the Schema column and drop them into the SQL ed
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset>
+    <iconset resource="icons/icons.qrc">
      <normaloff>:/icons/load_extension</normaloff>:/icons/load_extension</iconset>
    </property>
    <property name="text">
@@ -1535,7 +1554,7 @@ You can drag SQL statements from the Schema column and drop them into the SQL ed
   </action>
   <action name="actionSqlExecuteLine">
    <property name="icon">
-    <iconset>
+    <iconset resource="icons/icons.qrc">
      <normaloff>:/icons/run_line</normaloff>:/icons/run_line</iconset>
    </property>
    <property name="text">
@@ -1567,7 +1586,7 @@ You can drag SQL statements from the Schema column and drop them into the SQL ed
   </action>
   <action name="actionWiki">
    <property name="icon">
-    <iconset>
+    <iconset resource="icons/icons.qrc">
      <normaloff>:/icons/browser_open</normaloff>:/icons/browser_open</iconset>
    </property>
    <property name="text">
@@ -1582,7 +1601,7 @@ You can drag SQL statements from the Schema column and drop them into the SQL ed
   </action>
   <action name="actionBug_report">
    <property name="icon">
-    <iconset>
+    <iconset resource="icons/icons.qrc">
      <normaloff>:/icons/browser_open</normaloff>:/icons/browser_open</iconset>
    </property>
    <property name="text">
@@ -1594,7 +1613,7 @@ You can drag SQL statements from the Schema column and drop them into the SQL ed
   </action>
   <action name="actionFeature_Request">
    <property name="icon">
-    <iconset>
+    <iconset resource="icons/icons.qrc">
      <normaloff>:/icons/browser_open</normaloff>:/icons/browser_open</iconset>
    </property>
    <property name="text">
@@ -1606,7 +1625,7 @@ You can drag SQL statements from the Schema column and drop them into the SQL ed
   </action>
   <action name="actionWebsite">
    <property name="icon">
-    <iconset>
+    <iconset resource="icons/icons.qrc">
      <normaloff>:/icons/browser_open</normaloff>:/icons/browser_open</iconset>
    </property>
    <property name="text">
@@ -1618,7 +1637,7 @@ You can drag SQL statements from the Schema column and drop them into the SQL ed
   </action>
   <action name="actionDonatePatreon">
    <property name="icon">
-    <iconset>
+    <iconset resource="icons/icons.qrc">
      <normaloff>:/icons/browser_open</normaloff>:/icons/browser_open</iconset>
    </property>
    <property name="text">
@@ -1630,7 +1649,7 @@ You can drag SQL statements from the Schema column and drop them into the SQL ed
   </action>
   <action name="actionSaveProject">
    <property name="icon">
-    <iconset>
+    <iconset resource="icons/icons.qrc">
      <normaloff>:/icons/project_save</normaloff>:/icons/project_save</iconset>
    </property>
    <property name="text">
@@ -1651,7 +1670,7 @@ You can drag SQL statements from the Schema column and drop them into the SQL ed
   </action>
   <action name="actionOpenProject">
    <property name="icon">
-    <iconset>
+    <iconset resource="icons/icons.qrc">
      <normaloff>:/icons/project_open</normaloff>:/icons/project_open</iconset>
    </property>
    <property name="text">
@@ -1675,7 +1694,7 @@ You can drag SQL statements from the Schema column and drop them into the SQL ed
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset>
+    <iconset resource="icons/icons.qrc">
      <normaloff>:/icons/db_attach</normaloff>:/icons/db_attach</iconset>
    </property>
    <property name="text">
@@ -1696,7 +1715,7 @@ You can drag SQL statements from the Schema column and drop them into the SQL ed
   </action>
   <action name="actionEncryption">
    <property name="icon">
-    <iconset>
+    <iconset resource="icons/icons.qrc">
      <normaloff>:/icons/encryption</normaloff>:/icons/encryption</iconset>
    </property>
    <property name="text">
@@ -1708,7 +1727,7 @@ You can drag SQL statements from the Schema column and drop them into the SQL ed
   </action>
   <action name="actionSqlSaveFileAs">
    <property name="icon">
-    <iconset>
+    <iconset resource="icons/icons.qrc">
      <normaloff>:/icons/save_sql</normaloff>:/icons/save_sql</iconset>
    </property>
    <property name="text">
@@ -1720,7 +1739,7 @@ You can drag SQL statements from the Schema column and drop them into the SQL ed
   </action>
   <action name="actionSqlSaveFilePopup">
    <property name="icon">
-    <iconset>
+    <iconset resource="icons/icons.qrc">
      <normaloff>:/icons/save_sql</normaloff>:/icons/save_sql</iconset>
    </property>
    <property name="text">
@@ -1735,7 +1754,7 @@ You can drag SQL statements from the Schema column and drop them into the SQL ed
   </action>
   <action name="actionEditBrowseTable">
    <property name="icon">
-    <iconset>
+    <iconset resource="icons/icons.qrc">
      <normaloff>:/icons/table</normaloff>:/icons/table</iconset>
    </property>
    <property name="text">
@@ -1744,7 +1763,7 @@ You can drag SQL statements from the Schema column and drop them into the SQL ed
   </action>
   <action name="actionEditCopyCreateStatement">
    <property name="icon">
-    <iconset>
+    <iconset resource="icons/icons.qrc">
      <normaloff>:/icons/copy</normaloff>:/icons/copy</iconset>
    </property>
    <property name="text">
@@ -1756,7 +1775,7 @@ You can drag SQL statements from the Schema column and drop them into the SQL ed
   </action>
   <action name="actionSqlCipherFaq">
    <property name="icon">
-    <iconset>
+    <iconset resource="icons/icons.qrc">
      <normaloff>:/icons/browser_open</normaloff>:/icons/browser_open</iconset>
    </property>
    <property name="text">
@@ -1779,7 +1798,7 @@ You can drag SQL statements from the Schema column and drop them into the SQL ed
   </action>
   <action name="fileOpenReadOnlyAction">
    <property name="icon">
-    <iconset>
+    <iconset resource="icons/icons.qrc">
      <normaloff>:/icons/db_open</normaloff>:/icons/db_open</iconset>
    </property>
    <property name="text">
@@ -1803,7 +1822,7 @@ You can drag SQL statements from the Schema column and drop them into the SQL ed
   </action>
   <action name="actionSqlResultsSave">
    <property name="icon">
-    <iconset>
+    <iconset resource="icons/icons.qrc">
      <normaloff>:/icons/save_table</normaloff>:/icons/save_table</iconset>
    </property>
    <property name="text">
@@ -1821,7 +1840,7 @@ You can drag SQL statements from the Schema column and drop them into the SQL ed
     <bool>true</bool>
    </property>
    <property name="icon">
-    <iconset>
+    <iconset resource="icons/icons.qrc">
      <normaloff>:/icons/find</normaloff>:/icons/find</iconset>
    </property>
    <property name="text">
@@ -1848,7 +1867,7 @@ You can drag SQL statements from the Schema column and drop them into the SQL ed
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset>
+    <iconset resource="icons/icons.qrc">
      <normaloff>:/icons/text_replace</normaloff>:/icons/text_replace</iconset>
    </property>
    <property name="text">
@@ -1891,7 +1910,7 @@ You can drag SQL statements from the Schema column and drop them into the SQL ed
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset>
+    <iconset resource="icons/icons.qrc">
      <normaloff>:/icons/toolbar</normaloff>:/icons/toolbar</iconset>
    </property>
    <property name="text">
@@ -1909,7 +1928,7 @@ You can drag SQL statements from the Schema column and drop them into the SQL ed
     <bool>true</bool>
    </property>
    <property name="icon">
-    <iconset>
+    <iconset resource="icons/icons.qrc">
      <normaloff>:/icons/toolbar</normaloff>:/icons/toolbar</iconset>
    </property>
    <property name="text">
@@ -1918,7 +1937,7 @@ You can drag SQL statements from the Schema column and drop them into the SQL ed
   </action>
   <action name="fileOpenActionPopup">
    <property name="icon">
-    <iconset>
+    <iconset resource="icons/icons.qrc">
      <normaloff>:/icons/db_open</normaloff>:/icons/db_open</iconset>
    </property>
    <property name="text">
@@ -2010,7 +2029,7 @@ You can drag SQL statements from the Schema column and drop them into the SQL ed
   </action>
   <action name="actionSqlPrint">
    <property name="icon">
-    <iconset>
+    <iconset resource="icons/icons.qrc">
      <normaloff>:/icons/print</normaloff>:/icons/print</iconset>
    </property>
    <property name="text">
@@ -2037,7 +2056,7 @@ You can drag SQL statements from the Schema column and drop them into the SQL ed
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset>
+    <iconset resource="icons/icons.qrc">
      <normaloff>:/icons/print</normaloff>:/icons/print</iconset>
    </property>
    <property name="text">
@@ -2061,7 +2080,7 @@ You can drag SQL statements from the Schema column and drop them into the SQL ed
   </action>
   <action name="actionSqlToggleComment">
    <property name="icon">
-    <iconset>
+    <iconset resource="icons/icons.qrc">
      <normaloff>:/icons/comment_block</normaloff>:/icons/comment_block</iconset>
    </property>
    <property name="text">
@@ -2085,7 +2104,7 @@ You can drag SQL statements from the Schema column and drop them into the SQL ed
   </action>
   <action name="actionSqlStop">
    <property name="icon">
-    <iconset>
+    <iconset resource="icons/icons.qrc">
      <normaloff>:/icons/cancel</normaloff>:/icons/cancel</iconset>
    </property>
    <property name="text">
@@ -2100,7 +2119,7 @@ You can drag SQL statements from the Schema column and drop them into the SQL ed
   </action>
   <action name="actionSaveProjectAs">
    <property name="icon">
-    <iconset>
+    <iconset resource="icons/icons.qrc">
      <normaloff>:/icons/project_save_as</normaloff>:/icons/project_save_as</iconset>
    </property>
    <property name="text">
@@ -2118,7 +2137,7 @@ You can drag SQL statements from the Schema column and drop them into the SQL ed
   </action>
   <action name="actionSaveAll">
    <property name="icon">
-    <iconset>
+    <iconset resource="icons/icons.qrc">
      <normaloff>:/icons/save_all</normaloff>:/icons/save_all</iconset>
    </property>
    <property name="text">
@@ -2139,7 +2158,7 @@ You can drag SQL statements from the Schema column and drop them into the SQL ed
   </action>
   <action name="actionPopupSchemaDockBrowseTable">
    <property name="icon">
-    <iconset>
+    <iconset resource="icons/icons.qrc">
      <normaloff>:/icons/table</normaloff>:/icons/table</iconset>
    </property>
    <property name="text">

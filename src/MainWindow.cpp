@@ -325,7 +325,7 @@ void MainWindow::init()
     connect(ui->mainTab, &QTabWidget::tabCloseRequested, this, &MainWindow::closeTab);
 
     // Add entries for toggling the visibility of main tabs
-    for (QWidget* widget : {ui->structure, ui->browser, ui->pragmas, ui->query}) {
+    for (QWidget* widget : {ui->structure, ui->browser, ui->pragmas, ui->query, ui->dashboard}) {
         QAction* action = ui->viewMenu->addAction(QIcon(":/icons/open_sql"), widget->accessibleName());
         action->setCheckable(true);
         action->setChecked(ui->mainTab->indexOf(widget) != -1);
@@ -346,7 +346,7 @@ void MainWindow::init()
             restoreOpenTabs(defaultOpenTabs);
         });
 
-    // Set Alt+[1-4] shortcuts for opening the corresponding tab in that position.
+    // Set Alt+[1-5] shortcuts for opening the corresponding tab in that position.
     // Note that it is safe to call setCurrentIndex with a tab that is currently closed,
     // since setCurrentIndex does nothing in that case.
     QShortcut* setTab1Shortcut = new QShortcut(QKeySequence("Alt+1"), this);
@@ -357,7 +357,8 @@ void MainWindow::init()
     connect(setTab3Shortcut, &QShortcut::activated, [this]() { ui->mainTab->setCurrentIndex(2); });
     QShortcut* setTab4Shortcut = new QShortcut(QKeySequence("Alt+4"), this);
     connect(setTab4Shortcut, &QShortcut::activated, [this]() { ui->mainTab->setCurrentIndex(3); });
-
+    QShortcut* setTab5Shortcut = new QShortcut(QKeySequence("Alt+5"), this);
+    connect(setTab4Shortcut, &QShortcut::activated, [this]() { ui->mainTab->setCurrentIndex(4); });
     // If we're not compiling in SQLCipher, hide its FAQ link in the help menu
 #ifndef ENABLE_SQLCIPHER
     ui->actionSqlCipherFaq->setVisible(false);
@@ -3302,7 +3303,7 @@ void MainWindow::restoreOpenTabs(QString tabs)
         ui->mainTab->setUpdatesEnabled(false);
         ui->mainTab->clear();
         for (const auto& objectName : tabList) {
-            for (QWidget* widget : {ui->structure, ui->browser, ui->pragmas, ui->query})
+            for (QWidget* widget : {ui->structure, ui->browser, ui->pragmas, ui->query, ui->dashboard})
                 if (widget->objectName() == objectName) {
                     ui->mainTab->addTab(widget, widget->accessibleName());
                     break;
